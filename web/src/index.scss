@@ -1,0 +1,53 @@
+.visible {
+    visibility: visible;
+}
+
+.hidden {
+    visibility: visible;
+}
+
+.speedometerVisible {
+    position: absolute;
+    margin: 2px;
+    left: 310px;
+    bottom: 1vh;
+    width: 325px;
+    visibility: visible;
+}
+
+.speedometerHidden {
+    visibility: hidden;
+}
+
+.speedText {
+    position: relative;
+    font-size: 30px;
+    bottom: 5px;
+}
+
+.speedBar {
+    position: absolute;
+}
+
+.statusBar {
+    position: absolute;
+    margin: auto;
+    bottom: 1vh;
+    display: inline-block;
+}
+
+.statusIcon {
+    position: relative;
+    float: left;
+    text-align: center;
+    margin: 2px;
+    border-radius: 10px;
+    border-style: solid;
+    border-color: #000000;
+    color: #ffffff;
+    border-width: 8x;
+    font-size: 20px;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+}

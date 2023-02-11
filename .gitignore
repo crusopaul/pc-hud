@@ -1,0 +1,4 @@
+web/package-lock.json
+web/pnpm-lock.yaml
+web/build
+web/node_modules
