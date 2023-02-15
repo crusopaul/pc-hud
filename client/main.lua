@@ -61,7 +61,7 @@ CreateThread(function()
                         name = "health",
                         color = "#A52A2A",
                         icon = "heart",
-                        percent = GetEntityHealth(GetPlayerPed(-1)) / 2,
+                        percent = GetEntityHealth(GetPlayerPed(-1)) - 100,
                     },
                     {
                         name = "stamina",
