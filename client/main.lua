@@ -30,8 +30,9 @@ RegisterNetEvent('pc-hud:client:setStatusValue', function(name, value)
     end
 end)
 
--- Toggle visibility on login / logout
+-- Toggle visibility on login / logout & respect command state
 local visibility = 'hidden'
+local commandVisibility = true
 
 CreateThread(function()
     while true do
@@ -41,14 +42,25 @@ CreateThread(function()
             visibility = 'hidden'
         end
 
-        SendNUIMessage({
-            action = 'setVisibility',
-            data = visibility
-        })
+        if commandVisibility then
+            SendNUIMessage({
+                action = 'setVisibility',
+                data = visibility
+            })
+        else
+            SendNUIMessage({
+                action = 'setVisibility',
+                data = 'hidden'
+            })
+        end
 
         Wait(1000)
     end
 end)
+
+RegisterCommand('hud', function()
+    commandVisibility = not commandVisibility
+end, false)
 
 -- Health, stamina, and stress thread
 CreateThread(function()
