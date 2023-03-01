@@ -1,5 +1,5 @@
 description 'A hud system for pc-needs.'
-version '0.0.3'
+version '0.0.4'
 fx_version 'cerulean'
 game 'gta5'
 lua54 'yes'

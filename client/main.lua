@@ -112,26 +112,40 @@ end)
 -- Speedometer thread
 CreateThread(function()
     while true do
-        while visibility == 'visible' do
-            local vehicle = GetVehiclePedIsIn(GetPlayerPed(-1), false)
+        if commandVisibility then
+            while visibility == 'visible' and commandVisibility do
+                local vehicle = GetVehiclePedIsIn(GetPlayerPed(-1), false)
 
-            if vehicle ~= 0 then
-                local seatedPed = GetPedInVehicleSeat(vehicle, -1)
+                if vehicle ~= 0 then
+                    local seatedPed = GetPedInVehicleSeat(vehicle, -1)
 
-                if seatedPed == GetPlayerPed(-1) then
-                    local speed = GetEntitySpeed(vehicle) * 2.23694
+                    if seatedPed == GetPlayerPed(-1) then
+                        local speed = GetEntitySpeed(vehicle) * 2.23694
 
-                    SendNUIMessage({
-                        action = 'setSpeed',
-                        data = {
-                            speed = speed,
-                            progress = speed / 180 * 100,
-                            visibility = true,
-                            fuelProgress = GetVehicleFuelLevel(vehicle)
-                        }
-                    })
+                        SendNUIMessage({
+                            action = 'setSpeed',
+                            data = {
+                                speed = speed,
+                                progress = speed / 180 * 100,
+                                visibility = true,
+                                fuelProgress = GetVehicleFuelLevel(vehicle)
+                            }
+                        })
 
-                    Wait(100)
+                        Wait(100)
+                    else
+                        SendNUIMessage({
+                            action = 'setSpeed',
+                            data = {
+                                speed = 0,
+                                progress = 0,
+                                visibility = false,
+                                fuelProgress = 0
+                            }
+                        })
+
+                        Wait(1000)
+                    end
                 else
                     SendNUIMessage({
                         action = 'setSpeed',
@@ -145,19 +159,17 @@ CreateThread(function()
 
                     Wait(1000)
                 end
-            else
-                SendNUIMessage({
-                    action = 'setSpeed',
-                    data = {
-                        speed = 0,
-                        progress = 0,
-                        visibility = false,
-                        fuelProgress = 0
-                    }
-                })
-
-                Wait(1000)
             end
+        else
+            SendNUIMessage({
+                action = 'setSpeed',
+                data = {
+                    speed = 0,
+                    progress = 0,
+                    visibility = false,
+                    fuelProgress = 0
+                }
+            })
         end
 
         Wait(1000)
